@@ -160,7 +160,8 @@ export const Appointments = () => {
                                         return (
                                             <div key={doctor.id}>
 
-                                                <label ><input onClick={() => setNewAppointment({ ...newAppointment, Doctor: doctor.id })} type="radio" name="artist" value={doctor.id} />{doctor.user.firstName}</label>
+                                                <label ><input onClick={() => setNewAppointment({ ...newAppointment, Doctor: doctor.id })} type="radio" name="doctor" value={doctor.id} />{doctor.user.firstName}</label>
+                                                
                                             </div>
                                         )
                                     })}
