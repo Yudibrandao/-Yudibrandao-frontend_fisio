@@ -17,8 +17,8 @@ export const Login = () => {
     password: "",
   });
 
-  useEffect(()=> {
-    if(userLogued && userLogued.length > 5){
+  useEffect(() => {
+    if (userLogued && userLogued.length > 5) {
       navigate("/")
     }
 
@@ -36,20 +36,20 @@ export const Login = () => {
   const login = async (data) => {
     loginUsers(data)
       .then((token) => {
-        if(token&&token.length > 10){
-          const decoded=  decodeToken(token)
-        dispatch(userLogin({token:token, decodificado: decoded}))
+        if (token && token.length > 10) {
+          const decoded = decodeToken(token)
+          dispatch(userLogin({ token: token, decodificado: decoded }))
         }
-        else{
+        else {
           console.log("Usuario no encontrado")
         }
-             })
-      .catch((error)=>{
+      })
+      .catch((error) => {
         console.log(error)
       })
 
 
-      
+
   }
   return (
 

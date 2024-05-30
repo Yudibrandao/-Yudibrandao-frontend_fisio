@@ -16,6 +16,23 @@ export const loginUsers = (data) => {
     });
 }
 
+//En esta funcion me trae los datos datos de mi usuario por ID 
+export const editAdminUsersId = (userId, token) =>{
+  const config = {
+    headers: {
+      Authorization: (`Bearer ${token}`)
+    }
+  }
+  return axios
+  .get(`${API_URL}users/profile/`+ userId, config)
+  .then((res) => {
+    return res.data;
+  })
+  .catch((error) => {
+    return error;
+  });
+}
+
 //En esta funcion el usuario ingresa los datos para poder registarse, tambien maneja una respuesta exitosa o no
 export const registerUsers = (data) => {
   return axios
@@ -46,14 +63,14 @@ export const getDataUser = (token) => {
 }
 
 //Esta funcion utiliza un token de Autorizacion para actualizar informacion del perfil(borrar)
-export const deleteUsers = (token, data) => {
+export const deleteUsers = (userId, token) => {
   const config = {
     headers: {
       Authorization: (`Bearer ${token}`)
     }
   }
   return axios
-    .put(`${API_URL}users/profile/update`, data, config)
+    .delete(`${API_URL}delete/` + userId , config)
     .then((res) => {
       return res.data.message;
     })
@@ -225,6 +242,9 @@ export const deleteAppointment = (token, appointmentId) => {
       return error; // Lanza el error para que pueda ser manejado por quien llama a esta función
     });
 };
+
+
+
 
 
 

@@ -11,7 +11,8 @@ export const userSlice = createSlice({
             id: "",
         },
         vecesLogeado: 10,
-        appointments: [] // Nuevo campo para almacenar las citas del usuario
+        appointments: [], // Nuevo campo para almacenar las citas del usuario
+        adminEdithUsersId : 0 
     },
     reducers: {
         userLogin: (state, action) => {
