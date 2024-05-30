@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react'
 import { useSelector } from 'react-redux'
 import { userData } from '../../app/slices/userSlice'
-import { deleteUsers, editAdminUsersId } from '../../services/apiCalls'
+import { deleteUserId, editAdminUsersId } from '../../services/apiCalls'
 import { Button, Col, Container, Row } from 'react-bootstrap'
 import { CustomInput } from '../../components/CustomInput/CustomInput'
 import navigate from 'navigate'
@@ -32,7 +32,6 @@ export const AdminEdithUsers = () => {
   });
 
   useEffect(() => {
-    console.log(edithAdmin)
     editAdminUsersId(edithAdmin, token)
       .then((patata) => {
         setUser(patata)
@@ -51,12 +50,11 @@ export const AdminEdithUsers = () => {
     }));
   };
 
-  const deleteUser = (token) => { console.log(token)
+  const deleteUsersId = ( token) => {
     const delete_data = { isActive: "false" }
-    deleteUsers(token, delete_data)
+    deleteUserId(token, delete_data)
     navigate("/admin")
   }
-
 
   return (
 
@@ -107,10 +105,10 @@ export const AdminEdithUsers = () => {
         </Row>
         <Row className="d-flex justify-content-center mt-3">
               <Col md={4}>
-                <Button onClick={() => modify_user(data_modify, userToken) }>Modificar</Button>
+                <Button onClick={() => modify_user(data_modify, userId) }>Modificar</Button>
               </Col>
               <Col md={4}>
-                <Button onClick={() => { deleteUser(token) }}>Borrar</Button>
+                <Button onClick={() => { deleteUsersId(token) }}>Borrar</Button>
               </Col>
             </Row>
       </Container>

@@ -62,7 +62,7 @@ export const getDataUser = (token) => {
     })
 }
 
-//Esta funcion utiliza un token de Autorizacion para actualizar informacion del perfil(borrar)
+// Esta funcion utiliza un token de Autorizacion para actualizar informacion del perfil(borrar)
 export const deleteUsers = (userId, token) => {
   const config = {
     headers: {
@@ -78,6 +78,27 @@ export const deleteUsers = (userId, token) => {
       return error;
     })
 }
+
+//funcion que elimina o desactiva al usuario 
+
+export const deleteUserId = (userId, token) => {
+  const config = {
+    headers: {
+      Authorization: (`Bearer ${token}`)
+    }
+  }
+  return axios
+  .delete(`${API_URL}users/delete/` + userId, config)
+  .then((res) => {
+    return res.data.message;
+  })
+  .catch((error) => {
+    return error;
+  })
+}
+
+
+
 
 //Esta funcion me modifica y actualiza los datos del usuario
 export const updateUsers = (token, data) => {
