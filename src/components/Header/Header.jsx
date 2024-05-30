@@ -51,6 +51,11 @@ export const Header = () => {
                                 ) : (
                                     <Nav.Link as={Link} to="/citas"><p className='p_color'>Citas</p></Nav.Link>
                                 )}
+                                {userLogued && userLogued.userRole === "2" ? (
+                                    <Nav.Link as={Link} to="/doctor"><p className='p_color'>Doctor</p></Nav.Link>
+                                ) : (
+                                    <></>
+                                )}
                             </>
                         )}
                     </Nav>
