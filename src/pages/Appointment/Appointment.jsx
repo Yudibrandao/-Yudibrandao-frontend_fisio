@@ -116,7 +116,7 @@ export const Appointments = () => {
                                                         <h6>Precio : {cita.price}</h6>
                                                     </Col>
                                                     <Col md={12}>
-                                                        <h6>Tatuador : {cita.doctor.user.firstName}</h6>
+                                                        <h6>Doctor : {cita.doctor.user.firstName}</h6>
                                                     </Col>
                                                     <Col md={12}>
                                                         <h6>Email : {cita.doctor.user.email}</h6>
@@ -180,8 +180,8 @@ export const Appointments = () => {
                                         Terapia
                                     </Button>
                                 </div>
-                                <Button onClick={handleCreateAppointment}>Guardar</Button>
-                                <Button onClick={() => setShowCreateForm(false)}>Cancelar</Button>
+                                <Button className="botones" onClick={handleCreateAppointment}>Guardar</Button>
+                                <Button className="botones" onClick={() => setShowCreateForm(false)}>Cancelar</Button>
                             </Col>
 
                         </Row>

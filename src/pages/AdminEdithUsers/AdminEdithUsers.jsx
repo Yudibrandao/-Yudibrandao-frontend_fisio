@@ -4,43 +4,20 @@ import { userData } from '../../app/slices/userSlice'
 import { deleteUserId, editAdminUsersId } from '../../services/apiCalls'
 import { Button, Col, Container, Row } from 'react-bootstrap'
 import { CustomInput } from '../../components/CustomInput/CustomInput'
-import navigate from 'navigate'
+import { useNavigate } from 'react-router-dom'
 
 export const AdminEdithUsers = () => {
-
-
-  const edithAdmin = useSelector(userData).adminEdithUsersId
+  const user_id = useSelector(userData).adminEdithUsersId
   const token = useSelector(userData).token
-  const [user, setUser] = useState({
-    firstName: "",
-    lastName: "",
-    email: "",
-    password:"",
-    isActive:"", 
-    id: "",
-    role: "",
-  })
-
+  const navigate = useNavigate();
   const [data_modify, setDataModify] = useState({
     firstName: "",
     lastName: "",
     email: "",
     password:"",
     isActive:"", 
-    id: "",
     role: "",
   });
-
-  useEffect(() => {
-    editAdminUsersId(edithAdmin, token)
-      .then((patata) => {
-        setUser(patata)
-        setDataModify(patata); 
-      })
-      .catch((error) => {
-        console.log(error)
-      })
-  }, [edithAdmin])
 
 
   const inputHandler = (e) => {
@@ -50,9 +27,30 @@ export const AdminEdithUsers = () => {
     }));
   };
 
-  const deleteUsersId = ( token) => {
-    const delete_data = { isActive: "false" }
-    deleteUserId(token, delete_data)
+  const modify_user = (token, data, id) =>{
+    const data_send = {}
+    if(data.firstName !=="")data_send.firstName=data.firstName
+    if(data.lastName !=="")data_send.lastName=data.lastName
+    if(data.email !=="")data_send.email=data.email
+    if(data.password !=="")data_send.password=data.password
+    if(data.isActive !==""){
+      if(data.isActive==="true")data_send.isActive=true
+      if(data.isActive==="false")data_send.isActive=false
+    }
+    if(data.role!=="")data_send.role=data.role
+   
+    editAdminUsersId(id, token, data_send)
+
+    .then(()=>{
+
+    })
+    .catch((error)=>{
+      console.log(error)
+    })
+  }
+
+  const deleteUsersId = (token, id) => {
+    deleteUserId(id, token)
     navigate("/admin")
   }
 
@@ -105,10 +103,10 @@ export const AdminEdithUsers = () => {
         </Row>
         <Row className="d-flex justify-content-center mt-3">
               <Col md={4}>
-                <Button onClick={() => modify_user(data_modify, userId) }>Modificar</Button>
+                <Button className="botones" onClick={() => modify_user(token, data_modify, user_id ) }>Editar</Button>
               </Col>
               <Col md={4}>
-                <Button onClick={() => { deleteUsersId(token) }}>Borrar</Button>
+                <Button className="botones" onClick={() => { deleteUsersId(token, user_id ) }}>Borrar</Button>
               </Col>
             </Row>
       </Container>

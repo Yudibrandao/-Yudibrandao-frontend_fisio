@@ -13,7 +13,6 @@ export const Header = () => {
     const [isLogued, setLogued] = useState(false);
     const dispatch = useDispatch();
 
-    // Es un evento que comprueba si estás logueado
     useEffect(() => {
         if (userToken && userToken.length > 5) {
             setLogued(true);
@@ -22,7 +21,6 @@ export const Header = () => {
         }
     }, [userToken]);
 
-    // Elimino el token y el usuario guardado en redux
     const logout = () => {
         dispatch(userLogout());
     };
@@ -46,15 +44,14 @@ export const Header = () => {
                             <>
                                 <Nav.Link as={Link} to="/"><p className='p_color'>Inicio</p></Nav.Link>
                                 <Nav.Link as={Link} to="/profile"><p className='p_color'>Perfil</p></Nav.Link>
-                                {userLogued && userLogued.userRole === "1" ? (
+                                {userLogued && userLogued.userRole === "1" && (
                                     <Nav.Link as={Link} to="/admin"><p className='p_color'>Admin</p></Nav.Link>
-                                ) : (
+                                )}
+                                {userLogued && userLogued.userRole !== "1" && (
                                     <Nav.Link as={Link} to="/citas"><p className='p_color'>Citas</p></Nav.Link>
                                 )}
-                                {userLogued && userLogued.userRole === "2" ? (
-                                    <Nav.Link as={Link} to="/doctor"><p className='p_color'>Doctor</p></Nav.Link>
-                                ) : (
-                                    <></>
+                                {userLogued && userLogued.userRole === "2" && (
+                                    <Nav.Link as={Link} to="/doctor"><p className='p_color'>Listado de Citas</p></Nav.Link>
                                 )}
                             </>
                         )}
@@ -75,6 +72,3 @@ export const Header = () => {
         </Navbar>
     );
 };
-
-
-

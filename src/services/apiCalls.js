@@ -17,14 +17,14 @@ export const loginUsers = (data) => {
 }
 
 //En esta funcion me trae los datos datos de mi usuario por ID 
-export const editAdminUsersId = (userId, token) =>{
+export const editAdminUsersId = (userId, token, data) =>{
   const config = {
     headers: {
       Authorization: (`Bearer ${token}`)
     }
   }
   return axios
-  .get(`${API_URL}users/profile/`+ userId, config)
+  .put(`${API_URL}/admin/editarUsuario/${userId}`, data, config)
   .then((res) => {
     return res.data;
   })
@@ -88,7 +88,7 @@ export const deleteUserId = (userId, token) => {
     }
   }
   return axios
-  .delete(`${API_URL}users/delete/` + userId, config)
+  .delete(`${API_URL}users/delete/${userId}` , config)
   .then((res) => {
     return res.data.message;
   })

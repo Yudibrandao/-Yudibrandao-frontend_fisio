@@ -24,7 +24,7 @@ export const Doctor = () => {
     }, [userToken, userLogued.userRole]);
 
     return (
-        <Container className="">
+        <Container className="doctor_design">
             {userLogued.userRole === "2" && (
                 <Row>
                     {citasDoctor.map((cita) => (
@@ -39,14 +39,15 @@ export const Doctor = () => {
                                             <h6>Fecha : {cita.day_date}</h6>
                                         </Col>
                                         <Col md={12}>
-                                            <h6>Precio : {cita.price}</h6>
+                                            <h6>Precio : {cita.price}$</h6>
                                         </Col>
                                         <Col md={12}>
-                                            <h6>Tatuador : {cita.doctor.user.firstName}</h6>
+                                            <h6>Doctor : {cita.doctor.user.firstName}</h6>
                                         </Col>
                                         <Col md={12}>
-                                            <h6>Email : {cita.doctor.user.email}</h6>
+                                            <h6>Cliente : {cita.cliente.user.firstName}</h6>
                                         </Col>
+                                    
                                     </Row>
                                 </Col>
                             </Row>
